@@ -20,7 +20,5 @@ models:
   team_4c2_airbnb_transformations:
     staging:
       materialized: view
+      schema: staging
       snowflake_warehouse: DBT_WAREHOUSE
-    marts:
-      materialized: table
-      snowflake_warehouse: pc_dbt_wh_large

@@ -1,0 +1,9 @@
+version: 2
+
+sources:
+  - name: airbnb_source_data
+    database: airbnb_db
+    schema: airbnb_schema
+    tables:
+      - name: host
+      - name: property
