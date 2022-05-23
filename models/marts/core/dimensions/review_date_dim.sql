@@ -13,6 +13,7 @@ dimension as (
     select   {{ dbt_utils.surrogate_key(
                   'REVIEW_DATE',
              ) }} as REVIEW_DATE_KEY,    
+            REVIEW_DATE as "FORMATTED_DATE",
             day(REVIEW_DATE) as "DAY",
             month(REVIEW_DATE) as "MONTH", 
             year(REVIEW_DATE) as "YEAR"

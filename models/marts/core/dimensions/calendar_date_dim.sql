@@ -12,7 +12,8 @@ distinct_dates as (
 dimension as (
     select   {{ dbt_utils.surrogate_key(
                   'CALENDAR_DATE',
-             ) }} as CALENDAR_DATE_KEY,    
+             ) }} as CALENDAR_DATE_KEY,
+            CALENDAR_DATE as "FORMATTED_DATE",    
             day(CALENDAR_DATE) as "DAY",
             month(CALENDAR_DATE) as "MONTH", 
             year(CALENDAR_DATE) as "YEAR"

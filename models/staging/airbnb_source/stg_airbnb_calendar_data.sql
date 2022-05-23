@@ -17,16 +17,11 @@ transformed as(
             ADJUST_PRICE,
             MIN_NIGHTS,
             MAX_NIGHTS,
-            row_number() over (
+    from source 
+    qualify row_number() over (
               partition by PROPERTY_ID, DATE
               order by ROW_CHANGED_ON desc
-            ) as row_number
-    from source 
-    
-),
-
-deduplicated as (
-    select * from transformed where row_number = 1
+            ) = 1
 )
 
-select * from deduplicated
+select * from transformed

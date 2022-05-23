@@ -7,6 +7,7 @@ with source as (
 dimension as (
     select   {{ dbt_utils.surrogate_key(
                   'id',
+                   'row_changed_on'
              )}} as host_key,  
                 id,
                 current_date() as "ROW_CREATED_ON",
