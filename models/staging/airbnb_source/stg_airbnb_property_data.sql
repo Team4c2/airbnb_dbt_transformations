@@ -4,29 +4,30 @@ with source as (
  
 ), 
 
-property_with_row_num as(
-    select *,
-    row_number() over (
-        partition by id
-        order by row_created_on desc
-    ) as row_number 
-    from source
-),
-
 deduplicated as (
     select id, 
+            row_changed_on,
             name,
             description, 
             neighborhood_overview,
             host_id,
-            neighbourhood, 
-            neighbourhood_cleansed, 
+            case 
+              when neighbourhood  = '' then NULL
+              else neighbourhood
+            end as "LOCATION",
+            case 
+               when neighbourhood_cleansed = '' then NULL 
+               else neighbourhood_cleansed 
+            end as "NEIGHBOURHOOD", 
             longitude,
             property_type, 
             room_type,
             accommodates, 
-            bathrooms,
-            bathrooms_text,
+            case 
+              when bathrooms is null and bathrooms_text is not null and bathrooms_text <> ''
+                 then {{ dbt_utils.split_part(string_text='bathrooms_text', delimiter_text="' '", part_number=1) }}::integer
+              else bathrooms
+            end as bathrooms,
             bedrooms,
             beds,
             amenities, 
@@ -40,9 +41,11 @@ deduplicated as (
             review_scores_checkin,
             review_scores_communication, 
             review_scores_location,
-            is_instant_bookable
-    from property_with_row_num
-    where row_number = 1
+            is_instant_bookable,
+            city, 
+            state,
+            country
+    from source
 )
 
 select * from deduplicated

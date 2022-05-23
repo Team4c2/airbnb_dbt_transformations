@@ -2,8 +2,10 @@ version: 2
 
 sources:
   - name: airbnb_source_data
-    database: airbnb_db
+    database: dev_database
     schema: airbnb_schema
     tables:
       - name: host
       - name: property
+      - name: reviews
+      - name: calendar
