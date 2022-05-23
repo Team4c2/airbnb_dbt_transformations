@@ -18,7 +18,14 @@ clean-targets:
 
 models:
   team_4c2_airbnb_transformations:
+    snowflake_warehouse: DBT_WAREHOUSE
     staging:
-      materialized: view
+      +materialized: view
       schema: staging
-      snowflake_warehouse: DBT_WAREHOUSE
+    marts:
+       core:
+         +materialized: view
+         dimensions:
+           +schema: dimensions
+         facts:
+           +schema: facts

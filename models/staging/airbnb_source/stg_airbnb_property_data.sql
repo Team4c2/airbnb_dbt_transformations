@@ -5,7 +5,7 @@ with source as (
 ), 
 
 deduplicated as (
-    select id, 
+    select  id, 
             row_changed_on,
             name,
             description, 
@@ -24,7 +24,7 @@ deduplicated as (
             room_type,
             accommodates, 
             case 
-              when bathrooms is null and bathrooms_text is not null and bathrooms_text <> ''
+              when bathrooms is null and bathrooms_text is not null and regexp_like(bathrooms_text, '\\d.*')
                  then {{ dbt_utils.split_part(string_text='bathrooms_text', delimiter_text="' '", part_number=1) }}::integer
               else bathrooms
             end as bathrooms,

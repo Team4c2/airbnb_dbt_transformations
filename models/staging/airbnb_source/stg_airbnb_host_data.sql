@@ -13,7 +13,7 @@ deduplicated as (
         case 
           when location = '' then NULL
           else location
-        end as "location",
+        end as "LOCATION",
         about,
         response_time,
         verifications,
@@ -24,7 +24,7 @@ deduplicated as (
         case 
            when neighbourhood = '' then NULL
            else neighbourhood 
-        end as "neighbourhood",
+        end as "NEIGHBOURHOOD",
         listings_count,
         host_is_superhost
     from   source
