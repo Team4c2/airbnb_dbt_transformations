@@ -1,0 +1,156 @@
+version: 2
+
+models:
+  - name: guest_dim
+    description: "Dimension model for guest data"
+    columns:
+      - name: GUEST_KEY
+        description: "Surrogate key for natural key USER_ID"
+        tests:
+          - unique
+          - not_null
+      - name: USER_ID
+        descriprtion: "Natural key for a guest in Airbnb"
+        tests:
+          - unique
+          - not_null
+      - name: ROW_CREATED_ON
+        description: "Row creation date"
+      - name: FIRST_NAME
+        description: "First name of guest"
+      - name: LAST_NAME
+        description: "Last name of guest"
+      - name: PHONE_NO
+        description: "Phone number of guest"
+      - name: EMAIL_ID 
+        description: "Email ID of guest"
+      - name: DATE_OF_BIRTH
+        description: "Date of birth of guest"
+
+  - name: calendar_date_dim
+    description: "Dimension model for calendar date data"
+    columns:
+      - name: CALENDAR_DATE_KEY
+        description: "Surrogate key for Calendar date"
+        tests:
+          - unique
+          - not_null
+      - name: ROW_CREATED_ON
+        description: "Row creation date"
+      - name: FORMATTED_DATE
+        description: "Formatted Calendar date"
+        tests:
+          - unique
+          - not_null
+      - name: DAY
+        description: "Day of the month"
+      - name: MONTH
+        description: "Month of the year"
+      - name: YEAR
+        description: "year"
+    
+  - name: host_dim
+    description: "Dimension model for host data"
+    columns:
+      - name: HOST_KEY
+        description: "Surrogate key for host"
+        tests:
+          - unique
+          - not_null
+      - name: ID
+        description: "Natural key for host in Airbnb"
+        tests:
+          - unique
+          - not_null
+      - name: ROW_CREATED_ON 
+        description: "Row creation date"
+      - name: NAME
+        description: "Name of host"
+      - name: SINCE
+        description: "Date on which host joined Airbnb"
+      - name: LOCATION 
+        description: "Location of host"
+      - name: ABOUT 
+        description: "About host"
+      - name: RESPONSE_TIME
+        description: "Time by which host responds"  
+      - name: VERIFICATIONS 
+        description: "Methods of identity verifications"
+      - name: HAS_PROFILE_PIC 
+        description: "Does host have profile pic"
+      - name: IS_IDENTITY_VERIFIED 
+        description: "Is host identity verified"
+      - name: RESPONSE_RATE 
+        description: "Rate at which host responds"
+      - name: ACCEPTANCE_RATE 
+        description: "Rate at which host accepts requests"
+      - name: NEIGHBOURHOOD 
+        description: "Neighbourhood of host"
+      - name: LISTINGS_COUNT 
+        description: "Number of listings of host on Airbnb"
+      - name: HOST_IS_SUPERHOST 
+        description: "Is host a superhost"
+
+  - name: propert_dim
+    description: "Dimension model for property data"
+    columns:
+      - name: PROPERTY_KEY
+        description: "The surrogate key of property"
+        tests:
+          - unique
+          - not_null
+      - name: ID
+        description: "Unique property id in Airbnb"
+        tests:
+          - unique
+          - not_null
+      - name: ROW_CREATED_ON 
+        description: "Row creation date"
+      - name: LOCATION
+        description: "Location of the property"
+      - name: NEIGHBOURHOOD 
+        description: "Neighbourhood of property"
+      - name: LATITUDE 
+        description: "Latitude of property"
+      - name: LONGITUDE
+        description: "Longitude of property"
+      - name: PROPERTY_TYPE 
+        description: "Property type"
+      - name: ROOM_TYPE 
+        description: "Room type"
+      - name: BATHROOMS 
+        description: "Number of bathrooms"
+      - name: BEDROOMS 
+        description: "Number of bedrooms"
+      - name: BEDS 
+        description: "Number of beds"
+      - name: CITY 
+        description: "City name"
+      - name: STATE 
+        description: "State name"
+      - name: COUNTRY 
+        description: "Country name"
+
+  - name: review_date_dim
+    description: "Dimension model for calendar date data"
+    columns:
+      - name: REVIEW_DATE_KEY
+        description: "Surrogate key for review date"
+        tests:
+          - unique
+          - not_null
+      - name: ROW_CREATED_ON
+        description: "Row creation date"
+      - name: FORMATTED_DATE
+        description: "Formatted actual date"
+        tests:
+          - unique
+          - not_null
+      - name: DAY
+        description: "Day of the month"
+      - name: MONTH
+        description: "Month of the year"
+      - name: YEAR
+        description: "year"
+    
+      

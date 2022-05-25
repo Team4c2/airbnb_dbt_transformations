@@ -1,0 +1,123 @@
+version: 2
+
+models:
+  - name: calendar_fact
+    description: "Fact model for guest data"
+    columns:
+      - name: SURROGATE_KEY
+        description: "Unique key for the row"
+        tests:
+          - unique
+          - not_null
+      - name: PROPERTY_KEY
+        description: "Bound to primary key of property_dim"
+        tests:
+          - relationships:
+              to: ref('property_dim')
+              field: PROPERTY_KEY
+      - name: CALENDAR_DATE_KEY
+        description: "Bound to primary key of calendar_date_dim"
+        tests:
+          - relationships:
+              to: ref('calendar_date_dim')
+              field: CALENDAR_DATE_KEY
+      - name: ROW_CREATED_ON 
+        description: "Row creation date"
+      - name: AVAILABLE 
+        description: "Availablity on that day"
+      - name: PRICE 
+        description: "Price on that day"
+      - name: ADJUST_PRICE 
+        description: ""
+      - name: MIN_NIGHTS 
+        description: "Min nights"
+      - name: MAX_NIGHTS 
+        description: "Max nights"
+
+  -  name: listing_fact
+     description: "Fact model for listing data"
+     columns:
+      - name: SURROGATE_KEY
+        description: "Unique key for row"
+        tests:
+          - unique
+          - not_null
+      - name: PROPERTY_KEY
+        description: "Bound to primary key of property_dim"
+        tests:
+          - relationships:
+              to: ref('property_dim')
+              field: PROPERTY_KEY
+      - name: HOST_KEY
+        description: "Bound to primary key of host_dim"
+        tests:
+          - relationships:
+              to: ref('host_dim')
+              field: HOST_KEY
+      - name: ROW_CREATED_ON 
+        description: "Row creation date"
+      - name: NAME 
+        description: "Listing name"
+      - name: DESCRIPTION 
+        description: "Listing description"
+      - name: NEIGHBORHOOD_OVERVIEW 
+        description: "Listing neighbourhood overview"
+      - name: ACCOMMODATES 
+        description: "Number of guests allowed"
+      - name: AMENITIES 
+        description: "Amenities available"
+      - name: PRICE 
+        description: "Price of listing"
+      - name: MINIMUM_NIGHTS
+        description: "Min nights to spend"
+      - name: MAXIMUM_NIGHTS 
+        description: "Max nights to spend"
+      - name: NUMBER_OF_REVIEWS 
+        description: "Number of reviews"
+      - name: REVIEW_SCORES_RATING 
+        description: "Overall rating"
+      - name: REVIEW_SCORES_ACCURACY 
+        description: "Accuracy rating"
+      - name: REVIEW_SCORES_CLEANLINESS
+        description: "Cleanliness rating"
+      - name: REVIEW_SCORES_CHECKIN 
+        description: "Checkin rating"
+      - name: REVIEW_SCORES_COMMUNICATION
+        description: "Communication rating"
+      - name: REVIEW_SCORES_LOCATION 
+        description: "Location rating"
+      - name: IS_INSTANT_BOOKABLE 
+        description: "Is listing instantly bookable"
+    
+  -  name: review_fact
+     description: "Fact model for listing data"
+     columns:
+      - name: SURROGATE_KEY
+        description: "Unique key for row"
+        tests:
+          - unique
+          - not_null
+      - name: PROPERTY_KEY
+        description: "Bound to primary key of property_dim"
+        tests:
+          - relationships:
+              to: ref('property_dim')
+              field: PROPERTY_KEY
+      - name: GUEST_KEY
+        description: "Bound to primary key of guest_dim"
+        tests:
+          - relationships:
+              to: ref('guest_dim')
+              field: GUEST_KEY
+      - name: REVIEW_DATE_KEY
+        description: "Bound to primary key of review_date_dim"
+        tests:
+          - relationships:
+              to: ref('review_date_dim')
+              field: REVIEW_DATE_KEY
+      - name: ROW_CREATED_ON 
+        description: "Row creation date"
+      - name: COMMENTS 
+        description: "Review text"
+    
+      
