@@ -3,10 +3,6 @@ with source as (
     select * from {{source('airbnb_source_data','user') }}
  
 ),
-
-USER_ID 
-	
-
 columns_reorganized as (
     select user_id,
            ROW_CHANGED_ON, 

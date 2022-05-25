@@ -19,9 +19,9 @@ models:
               to: ref('calendar_date_dim')
               field: CALENDAR_DATE_KEY
 
- -  name: listing_fact
-    description: "fact model for listing data"
-    columns:
+  -  name: listing_fact
+     description: "fact model for listing data"
+     columns:
       - name: PROPERTY_KEY||HOST_KEY
         tests:
           - unique
@@ -37,9 +37,9 @@ models:
               to: ref('host_dim')
               field: HOST_KEY
     
- -  name: review_fact
-    description: "fact model for listing data"
-    columns:
+  -  name: review_fact
+     description: "fact model for listing data"
+     columns:
       - name: GUEST_KEY||PROPERTY_KEY||REVIEW_DATE_KEY
         tests:
           - unique

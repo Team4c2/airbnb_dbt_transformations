@@ -13,9 +13,9 @@ models:
           - unique
           - not_null
 
-   - name: calendar_date_dim
-     description: "Dimension model for calendar date data"
-     columns:
+  - name: calendar_date_dim
+    description: "Dimension model for calendar date data"
+    columns:
       - name: CALENDAR_DATE_KEY
         tests:
           - unique
@@ -25,9 +25,9 @@ models:
           - unique
           - not_null
     
-   - name: host_dim
-     description: "Dimension model for host data"
-     columns:
+  - name: host_dim
+    description: "Dimension model for host data"
+    columns:
       - name: HOST_KEY
         tests:
           - unique
@@ -37,9 +37,9 @@ models:
           - unique
           - not_null
    
-   - name: propert_dim
-     description: "Dimension model for property data"
-     columns:
+  - name: propert_dim
+    description: "Dimension model for property data"
+    columns:
       - name: PROPERTY_KEY
         tests:
           - unique
@@ -49,9 +49,9 @@ models:
           - unique
           - not_null
 
-    - name: review_date_dim
-      description: "Dimension model for calendar date data"
-      columns:
+  - name: review_date_dim
+    description: "Dimension model for calendar date data"
+    columns:
       - name: REVIEW_DATE_KEY
         tests:
           - unique
