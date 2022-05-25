@@ -5,14 +5,16 @@ with source as (
 ),
 
 distinct_dates as (
-    select distinct REVIEW_DATE
+    select distinct REVIEW_DATE, row_changed_on
     from source
 ),
 
 dimension as (
     select   {{ dbt_utils.surrogate_key(
                   'REVIEW_DATE',
-             ) }} as REVIEW_DATE_KEY,    
+                  'ROW_CHANGED_ON'
+             ) }} as REVIEW_DATE_KEY,  
+            current_date() as "ROW_CREATED_ON",
             REVIEW_DATE as "FORMATTED_DATE",
             day(REVIEW_DATE) as "DAY",
             month(REVIEW_DATE) as "MONTH", 

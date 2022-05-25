@@ -19,6 +19,7 @@ deduplicated as (
                when neighbourhood_cleansed = '' then NULL 
                else neighbourhood_cleansed 
             end as "NEIGHBOURHOOD", 
+            latitude,
             longitude,
             property_type, 
             room_type,

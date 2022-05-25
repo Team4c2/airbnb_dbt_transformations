@@ -16,7 +16,7 @@ transformed as(
             PRICE, 
             ADJUST_PRICE,
             MIN_NIGHTS,
-            MAX_NIGHTS,
+            MAX_NIGHTS
     from source 
     qualify row_number() over (
               partition by PROPERTY_ID, DATE

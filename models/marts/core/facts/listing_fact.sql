@@ -7,12 +7,13 @@ host_dim_source as (
 ),
 
 property_staging_source as (
-     select * from {{ ref('stg_airbnb_property_data') }}
+     select * from {{ ref('intermid_listing_data') }}
 ),
 
 combination as (
     select  pt_dim.property_key, 
             ho_dim.host_key,
+            current_date() as "ROW_CREATED_ON",
             pt_st.name,
             pt_st.description, 
             pt_st.neighborhood_overview,

@@ -13,6 +13,7 @@ dimension as (
             current_date() as row_created_on,
             LOCATION,
             NEIGHBOURHOOD, 
+            latitude,
             longitude,
             property_type, 
             room_type, 

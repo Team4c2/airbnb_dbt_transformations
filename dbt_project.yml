@@ -24,8 +24,11 @@ models:
       schema: staging
     marts:
        core:
-         +materialized: view
+         +materialized: table
          dimensions:
            +schema: dimensions
          facts:
            +schema: facts
+       intermediate:
+         +materialized: view
+         +schema: intermediate
