@@ -27,7 +27,11 @@ deduplicated as (
         end as "NEIGHBOURHOOD",
         listings_count,
         host_is_superhost
-    from   source
+    from  source
+    qualify row_number() over (
+              partition by id
+              order by ROW_CHANGED_ON desc
+            ) = 1
 )
 
 select * from deduplicated

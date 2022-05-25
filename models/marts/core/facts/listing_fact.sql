@@ -1,3 +1,10 @@
+{% set natural_key = dbt_utils.surrogate_key('PROPERTY_KEY', 'HOST_KEY') %}
+{{
+    config(
+        materialized='incremental',
+        unique_key=natural_key 
+    )
+}}
 with property_dim_source as (
     select * from {{ ref('property_dim') }}
 ),
@@ -8,6 +15,12 @@ host_dim_source as (
 
 property_staging_source as (
      select * from {{ ref('intermid_listing_data') }}
+     {% if is_incremental() %}
+
+     -- this filter will only be applied on an incremental run
+     where row_changed_on >= (select max(row_created_on) from {{ this }})
+
+     {% endif %}
 ),
 
 combination as (
@@ -35,10 +48,6 @@ combination as (
     on  pt_dim.id = pt_st.id
     inner join host_dim_source as ho_dim 
     on pt_st.host_id = ho_dim.id
-    qualify row_number() over (
-                partition by pt_dim.id, ho_dim.id
-                order by pt_dim.row_created_on, ho_dim.row_created_on
-               )  = 1
 )
 
 select * from combination

@@ -1,0 +1,64 @@
+version: 2
+
+models:
+  - name: guest_dim
+    description: "Dimension model for guest data"
+    columns:
+      - name: GUEST_KEY
+        tests:
+          - unique
+          - not_null
+      - name: USER_ID
+        tests:
+          - unique
+          - not_null
+
+   - name: calendar_date_dim
+     description: "Dimension model for calendar date data"
+     columns:
+      - name: CALENDAR_DATE_KEY
+        tests:
+          - unique
+          - not_null
+      - name: FORMATTED_DATE
+        tests:
+          - unique
+          - not_null
+    
+   - name: host_dim
+     description: "Dimension model for host data"
+     columns:
+      - name: HOST_KEY
+        tests:
+          - unique
+          - not_null
+      - name: ID
+        tests:
+          - unique
+          - not_null
+   
+   - name: propert_dim
+     description: "Dimension model for property data"
+     columns:
+      - name: PROPERTY_KEY
+        tests:
+          - unique
+          - not_null
+      - name: ID
+        tests:
+          - unique
+          - not_null
+
+    - name: review_date_dim
+      description: "Dimension model for calendar date data"
+      columns:
+      - name: REVIEW_DATE_KEY
+        tests:
+          - unique
+          - not_null
+      - name: FORMATTED_DATE
+        tests:
+          - unique
+          - not_null
+    
+      

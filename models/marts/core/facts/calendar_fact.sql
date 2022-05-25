@@ -1,3 +1,10 @@
+{% set natural_key = dbt_utils.surrogate_key('PROPERTY_KEY', 'CALENDAR_DATE_KEY') %}
+{{
+    config(
+        materialized='incremental',
+        unique_key=natural_key 
+    )
+}}
 with property_dim_source as (
     select * from {{ ref('property_dim') }}
 ),
@@ -8,10 +15,16 @@ calendar_date_dim_source as (
 
 calendar_staging_source as (
      select * from {{ ref('intermid_calendar_data') }}
+     {% if is_incremental() %}
+
+  -- this filter will only be applied on an incremental run
+     where row_changed_on >= (select max(row_created_on) from {{ this }})
+
+     {% endif %}
 ),
 
 combination as (
- select     pt_dim.propert_key, 
+ select     pt_dim.property_key, 
             cal_dim.CALENDAR_DATE_KEY,
             current_date() as "ROW_CREATED_ON",
             st_cal.AVAILABLE,
@@ -24,10 +37,6 @@ combination as (
     on pt_dim.id = st_cal.PROPERTY_ID
     inner join calendar_date_dim_source as cal_dim 
     on st_cal.CALENDAR_DATE = cal_dim.FORMATTED_DATE
-    qualify row_number() over (
-                partition by pt_dim.id, cal_dim.FORMATTED_DATE
-                order by pt_dim.row_created_on, cal_dim.ROW_CREATED_ON
-               )  = 1
 )
 
 select * from combination

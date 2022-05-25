@@ -9,3 +9,4 @@ sources:
       - name: property
       - name: reviews
       - name: calendar
+      - name: user

@@ -36,17 +36,22 @@ deduplicated as (
             minimum_nights, 
             maximum_nights,
             number_of_reviews, 
-            review_scores_rating, 
-            review_scores_accuracy, 
-            review_scores_cleanliness, 
-            review_scores_checkin,
-            review_scores_communication, 
-            review_scores_location,
+            review_scores_rating::float, 
+            review_scores_accuracy::float, 
+            review_scores_cleanliness::float, 
+            review_scores_checkin::float,
+            review_scores_communication::float, 
+            review_scores_location::float,
             is_instant_bookable,
             city, 
             state,
             country
     from source
+    qualify row_number() over (
+              partition by id
+              order by ROW_CHANGED_ON desc
+            ) = 1
+    
 )
 
 select * from deduplicated

@@ -17,6 +17,14 @@ models:
           - unique
           - not_null
 
+  - name: stg_airbnb_guest_data
+    description: "Staging model for property data"
+    columns:
+      - name: user_id
+        tests:
+          - unique
+          - not_null
+
   - name: stg_airbnb_reviews_data
     description: "Staging model for reviews data"
     columns:

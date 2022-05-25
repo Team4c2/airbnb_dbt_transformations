@@ -12,5 +12,9 @@ columns_reorganized as (
            REVIEWER_NAME,
            COMMENTS
     from source
+    qualify row_number() over (
+              partition by user_id,property_id,REVIEW_DATE 
+              order by ROW_CHANGED_ON desc
+            ) = 1
 )
 select * from columns_reorganized
