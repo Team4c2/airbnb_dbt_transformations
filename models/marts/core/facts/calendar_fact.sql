@@ -1,8 +1,7 @@
-{% set natural_key = dbt_utils.surrogate_key('PROPERTY_KEY', 'CALENDAR_DATE_KEY') %}
 {{
     config(
         materialized='incremental',
-        unique_key=natural_key 
+        unique_key='SURROGATE_KEY'
     )
 }}
 with property_dim_source as (
@@ -18,14 +17,17 @@ calendar_staging_source as (
      {% if is_incremental() %}
 
   -- this filter will only be applied on an incremental run
-     where row_changed_on >= (select max(row_created_on) from {{ this }})
+     where row_changed_on > (select max(row_created_on) from {{ this }})
 
      {% endif %}
 ),
 
 combination as (
- select     pt_dim.property_key, 
-            cal_dim.CALENDAR_DATE_KEY,
+   select    {{ dbt_utils.surrogate_key(
+                  'PROPERTY_KEY', 'CALENDAR_DATE_KEY'
+             ) }} as surrogate_key,  
+             property_key, 
+            CALENDAR_DATE_KEY,
             current_date() as "ROW_CREATED_ON",
             st_cal.AVAILABLE,
             st_cal.PRICE, 

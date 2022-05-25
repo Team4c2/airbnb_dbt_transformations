@@ -10,7 +10,7 @@ with source as (
     {% if is_incremental() %}
 
   -- this filter will only be applied on an incremental run
-     where row_changed_on >= (select max(row_created_on) from {{ this }})
+     where row_changed_on > (select max(row_created_on) from {{ this }})
 
     {% endif %}
  

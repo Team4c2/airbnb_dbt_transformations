@@ -4,7 +4,7 @@ models:
   - name: calendar_fact
     description: "fact model for guest data"
     columns:
-      - name: PROPERTY_KEY||CALENDAR_DATE_KEY
+      - name: SURROGATE_KEY
         tests:
           - unique
           - not_null
@@ -22,7 +22,7 @@ models:
   -  name: listing_fact
      description: "fact model for listing data"
      columns:
-      - name: PROPERTY_KEY||HOST_KEY
+      - name: SURROGATE_KEY
         tests:
           - unique
           - not_null
@@ -40,7 +40,7 @@ models:
   -  name: review_fact
      description: "fact model for listing data"
      columns:
-      - name: GUEST_KEY||PROPERTY_KEY||REVIEW_DATE_KEY
+      - name: SURROGATE_KEY
         tests:
           - unique
           - not_null
