@@ -1,6 +1,6 @@
 with source as (
  
-    select * from {{source('airbnb_source_data','reviews') }}
+    select * from {{source('airbnb_source_data','reviews'}} order by user_id,property_id,REVIEW_DATE
  
 ),
 

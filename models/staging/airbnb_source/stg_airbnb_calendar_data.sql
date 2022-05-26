@@ -1,6 +1,6 @@
 with source as (
  
-    select * from {{source('airbnb_source_data','calendar') }}
+    select * from {{source('airbnb_source_data','calendar') }} order by PROPERTY_ID, DATE
  
 ),
 
@@ -13,8 +13,16 @@ transformed as(
               when AVAILABLE = 'f' then False
               else AVAILABLE
             end as "AVAILABLE",
-            PRICE, 
-            ADJUST_PRICE,
+            case 
+              when PRICE is not null and regexp_like(PRICE, '\\$.*')
+                 then REPLACE(REPLACE(PRICE, '$'), ',')::float
+              else NULL 
+            end as PRICE,
+            case 
+              when ADJUST_PRICE is not null and regexp_like(ADJUST_PRICE, '\\$.*')
+                 then REPLACE(REPLACE(ADJUST_PRICE, '$'), ',')::float
+              else NULL 
+            end as ADJUST_PRICE,
             MIN_NIGHTS,
             MAX_NIGHTS
     from source 

@@ -1,6 +1,6 @@
 with source as (
  
-    select * from {{source('airbnb_source_data','host') }}
+    select * from {{source('airbnb_source_data','host')}} order by id
  
 ), 
 deduplicated as (

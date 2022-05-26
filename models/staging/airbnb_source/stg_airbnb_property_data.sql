@@ -1,6 +1,6 @@
 with source as (
  
-    select * from {{source('airbnb_source_data','property') }}
+    select * from {{source('airbnb_source_data','property')}} order by id 
  
 ), 
 
@@ -32,7 +32,11 @@ deduplicated as (
             bedrooms,
             beds,
             amenities, 
-            price,
+            case 
+              when price is not null and regexp_like(price, '\\$.*')
+                 then REPLACE(REPLACE(price, '$'), ',')::float 
+              else NULL 
+            end as price,
             minimum_nights, 
             maximum_nights,
             number_of_reviews, 

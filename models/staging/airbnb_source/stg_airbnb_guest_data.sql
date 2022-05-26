@@ -1,6 +1,6 @@
 with source as (
  
-    select * from {{source('airbnb_source_data','user') }}
+    select * from {{source('airbnb_source_data','user') }} order by user_id 
  
 ),
 columns_reorganized as (
