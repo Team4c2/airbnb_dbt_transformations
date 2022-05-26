@@ -1,6 +1,6 @@
 with source as (
  
-    select * from {{source('airbnb_source_data','calendar') }} order by PROPERTY_ID, DATE
+    select * from {{ source('airbnb_source_data','calendar') }} order by PROPERTY_ID, DATE
  
 ),
 
