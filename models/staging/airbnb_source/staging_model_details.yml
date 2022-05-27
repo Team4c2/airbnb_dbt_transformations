@@ -18,7 +18,7 @@ models:
           - not_null
 
   - name: stg_airbnb_guest_data
-    description: "Staging model for property data"
+    description: "Staging model for guest data"
     columns:
       - name: user_id
         tests:
